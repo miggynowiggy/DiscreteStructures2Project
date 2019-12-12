@@ -311,7 +311,13 @@
        //uncomment the variable declarations to use the variables
 
        
-       Acad = (((6 - GenEd / 5) * 100) + ( (6 - ProfEd / 5) * 100) + ((6 - MEd / 5) * 100)) / 3;
+       Acad = (
+          (
+            ((6 - GenEd / 5) * 100) + 
+            ((6 - ProfEd / 5) * 100) + 
+            ((6 - MEd / 5) * 100)
+          ) / 3
+         );
        Acad = parseFloat(Acad);
       //  if(SelfReview === "true") ProtoSelf = 100;
       //  else ProtoSelf = 20;
