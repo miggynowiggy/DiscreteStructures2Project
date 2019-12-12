@@ -294,15 +294,15 @@
       submitAnswers() {
         //this is where the answer will be processed
         
-        let GenEd = this.genEd;
-        let ProfEd = this.profEd;
-        let MEd = this.MEed;
-        let ReviewC = this.reviewCenter;
-        let SelfReview = this.selfReview;
+        let GenEd = parseFloat(this.genEd);
+        let ProfEd = parseFloat(this.profEd);
+        let MEd = parseFloat(this.MEed);
+        let ReviewC = parseInt(this.reviewCenter);
+        let SelfReview = parseInt(this.selfReview);
         let university = this.university;
         let course = this.course;
-        let NatPassScore = this.nationalPassingScore;
-        let Confidence = this.confidence;
+        let NatPassScore = parseFloat(this.nationalPassingScore);
+        let Confidence = parseInt(this.confidence);
         let Acad = 0;
         let ProtoSelf = 0;
         let ProtoRevC = 0;
@@ -311,13 +311,14 @@
        //uncomment the variable declarations to use the variables
 
        
-       Acad = (((6-GenEd/5)*100)+((6-ProfEd/5)*100)+ ((6-MEd/5)*100))/3;
-       if(SelfReview == true) ProtoSelf =100;
-       else ProtoSelf = 20;
-       if(ReviewC == true) ProtoRevC =100;
-       else ProtoRevC = 20;
+       Acad = (((6 - GenEd / 5) * 100) + ( (6 - ProfEd / 5) * 100) + ((6 - MEd / 5) * 100)) / 3;
+       Acad = parseFloat(Acad);
+      //  if(SelfReview === "true") ProtoSelf = 100;
+      //  else ProtoSelf = 20;
+      //  if(ReviewC === "true") ProtoRevC = 100;
+      //  else ProtoRevC = 20;
        
-       probability = (Acad + ProtoSelf + ProtoRevC + NatPassScore + (Confidence * 20))/5;
+       probability = (Acad + SelfReview + ReviewC + NatPassScore + (Confidence * 20))/5;
        
        //insert your calculations here
        
