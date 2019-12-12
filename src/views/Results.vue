@@ -25,7 +25,7 @@
                             </v-flex>
                             <v-flex xs5 mt-4>
                                 <v-progress-circular size="300" :value="probability" color="accent" width="20" class="dark">
-                                    <div class="display-4"> 
+                                    <div class="display-3"> 
                                         {{ probability }}% 
                                     </div>
                                 </v-progress-circular>
@@ -34,14 +34,22 @@
 
                         <v-layout align-center justify-center mt-6>
                             <v-flex xs12 class="display-1 lighten-2 accent--text ">
-                                <div class="font-weight-bold text-center" v-if="probability > 50">CONGRATULATIONS! Isa kang alamat!</div>
-                                <div class="font-weight-bold text-center" v-else-if="probability == 50">CONGRATULATIONS! May Pag-Asa Pa Yan!</div>
-                                <div class="font-weight-bold text-center" v-else-if="probability < 50">CONGRATULATIONS! Kailangan mo pang magsigpag ng maigi</div>
+                                <div class="font-weight-bold text-center" v-if="probability > 60">CONGRATULATIONS! Isa kang alamat!</div>
+                                <div class="font-weight-bold text-center" v-else-if="probability == 60">CONGRATULATIONS! May Pag-Asa Pa Yan!</div>
+                                <div class="font-weight-bold text-center" v-else-if="probability < 60">CONGRATULATIONS! Kailangan mo pang magsigpag ng maigi</div>
                                 <div class="font-weight-bold text-center" v-else>CONGRATULATIONS! Kasi wala kaming na-compute sa mga sagot mo.</div>
                             </v-flex>
                         </v-layout>
                     </v-card-text>
                 </v-card>
+            </v-flex>
+        </v-layout>
+        <v-layout align-center justify-start mt-6>
+            <v-flex xs4 offset-xs3>
+                <v-btn class="elevation-6" color="accent" @click="$router.push('/')">
+                    BACK TO HOME PAGE
+                    <v-icon>home</v-icon>
+                </v-btn>
             </v-flex>
         </v-layout>
     </div>

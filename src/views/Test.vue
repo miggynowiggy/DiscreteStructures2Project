@@ -134,17 +134,17 @@
                   v-model="nationalPassingScore"
                   type="number"
                   label="National Passing Score of your licensure Exam"
-                  hint="Enter the minimum score needed to be considered as a passer of your licensure exam"
+                  hint="Enter the minimum score (in percentage) needed to be considered as a passer of your licensure exam"
                   outlined rounded
                 ></v-text-field>
               </v-flex>
 
-              <v-flex xs10>
+              <v-flex xs10 mt-6>
                 <v-layout wrap>
                   <v-flex xs12>
                     <div class="secondary--text subtitle-1 font-weight-bold">
                       Describe your confidence level of passing before taking the licensure exam
-                      <span class="font-italic subtitle-2 grey--text">(1 - Not Confident at All, 5 - Highly Confident)</span>
+                      <div class="font-italic subtitle-2 grey--text">(1 - Not Confident at All, 5 - Highly Confident)</div>
                     </div>
                   </v-flex>
                   <v-flex xs12>
@@ -212,9 +212,6 @@
 
 <script>
   export default {
-    mounted() {
-      //this.submitAnswers();
-    },
     data() {
       return {
         genEd: null,
@@ -299,37 +296,25 @@
         let MEd = parseFloat(this.MEed);
         let ReviewC = parseInt(this.reviewCenter);
         let SelfReview = parseInt(this.selfReview);
-        //let university = this.university;
-        //let course = this.course;
         let NatPassScore = parseFloat(this.nationalPassingScore);
         let Confidence = parseInt(this.confidence);
         let Acad = 0;
-        // let ProtoSelf = 0;
-        // let ProtoRevC = 0;
         
-       let probability;
-       //uncomment the variable declarations to use the variables
-
+        let probability;
        
-       Acad = (
+        Acad = (
           (
             ((6 - GenEd / 5) * 100) + 
             ((6 - ProfEd / 5) * 100) + 
             ((6 - MEd / 5) * 100)
           ) / 3
-         );
+        );
        Acad = parseFloat(Acad);
-      //  if(SelfReview === "true") ProtoSelf = 100;
-      //  else ProtoSelf = 20;
-      //  if(ReviewC === "true") ProtoRevC = 100;
-      //  else ProtoRevC = 20;
        
        probability = (Acad + SelfReview + ReviewC + (NatPassScore/100) + (Confidence * 20)) /5;
-       
-       //insert your calculations here
+       probability -= 100;
 
        //cant touch this, kasi ito yung magpapasa ng sagot na probability papunta sa next page na results
-       //patanggal na lang nung 50 sa probability hehehehehe
 
         this.$router.push({
           name: 'results',
