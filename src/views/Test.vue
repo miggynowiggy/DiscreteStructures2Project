@@ -327,17 +327,10 @@
        probability = (Acad + SelfReview + ReviewC + NatPassScore + (Confidence * 20))/5;
        
        //insert your calculations here
-       
-       
-       
-       
-       
-       
 
        //cant touch this, kasi ito yung magpapasa ng sagot na probability papunta sa next page na results
        //patanggal na lang nung 50 sa probability hehehehehe
 
-        probability= 50;
         this.$router.push({
           name: 'results',
           params: {
