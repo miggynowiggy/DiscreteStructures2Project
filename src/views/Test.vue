@@ -299,13 +299,13 @@
         let MEd = parseFloat(this.MEed);
         let ReviewC = parseInt(this.reviewCenter);
         let SelfReview = parseInt(this.selfReview);
-        let university = this.university;
-        let course = this.course;
+        //let university = this.university;
+        //let course = this.course;
         let NatPassScore = parseFloat(this.nationalPassingScore);
         let Confidence = parseInt(this.confidence);
         let Acad = 0;
-        let ProtoSelf = 0;
-        let ProtoRevC = 0;
+        // let ProtoSelf = 0;
+        // let ProtoRevC = 0;
         
        let probability;
        //uncomment the variable declarations to use the variables
@@ -324,7 +324,7 @@
       //  if(ReviewC === "true") ProtoRevC = 100;
       //  else ProtoRevC = 20;
        
-       probability = (Acad + SelfReview + ReviewC + NatPassScore + (Confidence * 20))/5;
+       probability = (Acad + SelfReview + ReviewC + (NatPassScore/100) + (Confidence * 20)) /5;
        
        //insert your calculations here
 
@@ -334,7 +334,7 @@
         this.$router.push({
           name: 'results',
           params: {
-            probability: probability,
+            probability: probability.toFixed(2),
           }
         });
       }
