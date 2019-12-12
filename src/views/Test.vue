@@ -213,7 +213,7 @@
 <script>
   export default {
     mounted() {
-      this.submitAnswers();
+      //this.submitAnswers();
     },
     data() {
       return {
@@ -293,7 +293,7 @@
 
       submitAnswers() {
         //this is where the answer will be processed
-        /*
+        
         let GenEd = this.genEd;
         let ProfEd = this.profEd;
         let MEd = this.MEed;
@@ -303,22 +303,29 @@
         let course = this.course;
         let NatPassScore = this.nationalPassingScore;
         let Confidence = this.confidence;
-        */
+        let Acad = 0;
+        let ProtoSelf = 0;
+        let ProtoRevC = 0;
+        
        let probability;
        //uncomment the variable declarations to use the variables
 
-       /*
+       
+       Acad = (((6-GenEd/5)*100)+((6-ProfEd/5)*100)+ ((6-MEd/5)*100))/3;
+       if(SelfReview == true) ProtoSelf =100;
+       else ProtoSelf = 20;
+       if(ReviewC == true) ProtoRevC =100;
+       else ProtoRevC = 20;
+       
+       probability = (Acad + ProtoSelf + ProtoRevC + NatPassScore + (Confidence * 20))/5;
+       
+       //insert your calculations here
        
        
        
        
-       insert your calculations here
        
        
-       
-       
-       
-       */
 
        //cant touch this, kasi ito yung magpapasa ng sagot na probability papunta sa next page na results
        //patanggal na lang nung 50 sa probability hehehehehe
