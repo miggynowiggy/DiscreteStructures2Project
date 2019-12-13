@@ -28,34 +28,23 @@
               </v-flex>
 
               <v-flex xs10 mb-4>
-                <div class="overline ml-4 mb-1">General Education GWA</div>
+                <div class="overline ml-4 mb-1">General Weighted Average during 4th Year</div>
                 <v-text-field
-                  v-model="genEd"
+                  v-model="GWA"
                   type="number"
-                  label="General Education GWA"
-                  hint="Enter the GWA of your general eduaction subjects 4th year"
+                  label="General Weighted Average"
+                  hint="Enter your GWA during 4th year"
                   outlined rounded
                 ></v-text-field>
               </v-flex>
 
               <v-flex xs10 mb-4>
-                <div class="overline ml-4 mb-1">Professional Education GWA</div>
+                <div class="overline ml-4 mb-1">Pre-Board Mock Exams Score</div>
                 <v-text-field
-                  v-model="profEd"
+                  v-model="preBoard"
                   type="number"
-                  label="Professional Education GWA"
-                  hint="Enter the GWA of your professional eduaction subjects 4th year"
-                  outlined rounded
-                ></v-text-field>
-              </v-flex>
-
-              <v-flex xs10 mb-4>
-                <div class="overline ml-4 mb-1">Major Education GWA</div>
-                <v-text-field
-                  v-model="MEed"
-                  type="number"
-                  label="Major Education GWA"
-                  hint="Enter the GWA of your major eduaction subjects 4th year"
+                  label="Pre Board Mock Exams Score"
+                  hint="Enter your Pre-Board Mock Exams Scores"
                   outlined rounded
                 ></v-text-field>
               </v-flex>
@@ -78,7 +67,7 @@
                   <v-flex xs12>
                     <v-radio-group v-model="reviewCenter" row>
                       <v-radio label="True" value="100"></v-radio>
-                      <v-radio label="False" value="20"></v-radio>
+                      <v-radio label="False" value="50"></v-radio>
                     </v-radio-group>
                   </v-flex>
                 </v-layout>
@@ -92,7 +81,7 @@
                   <v-flex xs12>
                     <v-radio-group v-model="selfReview" row>
                       <v-radio label="True" value="100"></v-radio>
-                      <v-radio label="False" value="20"></v-radio>
+                      <v-radio label="False" value="50"></v-radio>
                     </v-radio-group>
                   </v-flex>
                 </v-layout>
@@ -106,26 +95,6 @@
             <v-layout wrap align-center justify-center>
               <v-flex xs12>
                 <div class="primary--text font-weight-bold title">Self-Assessment</div>
-              </v-flex>
-
-              <v-flex xs10 mt-4>
-                <div class="overline ml-4 mb-1">Name of University</div>
-                <v-text-field
-                  v-model="university"
-                  label="Name of University"
-                  hint="Enter the name of the university you have graduated"
-                  outlined rounded
-                ></v-text-field>
-              </v-flex>
-
-              <v-flex xs10 mt-4>
-                <div class="overline ml-4 mb-1">Undergraduate Course </div>
-                <v-text-field
-                  v-model="course"
-                  label="Undegraduate Course"
-                  hint="Enter the undergraduate course you have finished"
-                  outlined rounded
-                ></v-text-field>
               </v-flex>
 
               <v-flex xs10>
@@ -214,13 +183,10 @@
   export default {
     data() {
       return {
-        genEd: null,
-        profEd: null,
-        MEed: null,
+        GWA: null,
+        preBoard: null,
         reviewCenter: null,
         selfReview: null,
-        university: null,
-        course: null,
         nationalPassingScore: null,
         confidence: null,
         loading: false,
@@ -239,18 +205,13 @@
       },
       validateAnswers() {
         this.loading = true;
-        if(!this.genEd) {
-          this.showAlertDialog("Warning!", "Please indicate your General Education GWA");
+        if(!this.GWA) {
+          this.showAlertDialog("Warning!", "Please indicate your GWA");
           this.loading = false;
           return;
         }
-        else if(!this.profEd) {
-          this.showAlertDialog("Warning!", "Please indicate your Professional Education GWA");
-          this.loading = false;
-          return;
-        }
-        else if(!this.MEed) {
-          this.showAlertDialog("Warning!", "Please indicate your Major Education GWA");
+        else if(!this.preBoard) {
+          this.showAlertDialog("Warning!", "Please indicate your Pre-Board Mock Exams Scores");
           this.loading = false;
           return;
         }
@@ -261,16 +222,6 @@
         }
         else if(this.selfReview === null) {
           this.showAlertDialog("Warning!", "Please choose an answer to 'Are you also doing a Self Review?");
-          this.loading = false;
-          return;
-        }
-        else if(!this.university || this.university === '') {
-          this.showAlertDialog("Warning!", "Please indicate your University Name");
-          this.loading = false;
-          return;
-        }
-        else if(!this.course || this.course === '') {
-          this.showAlertDialog("Warning!", "Please indicate your Undergraduate Course");
           this.loading = false;
           return;
         }
@@ -291,28 +242,84 @@
       submitAnswers() {
         //this is where the answer will be processed
         
-        let GenEd = parseFloat(this.genEd);
-        let ProfEd = parseFloat(this.profEd);
-        let MEd = parseFloat(this.MEed);
+        let GWA = parseFloat(this.GWA);
+        let preBoard = parseFloat(this.preBoard);
         let ReviewC = parseInt(this.reviewCenter);
         let SelfReview = parseInt(this.selfReview);
         let NatPassScore = parseFloat(this.nationalPassingScore);
-        let Confidence = parseInt(this.confidence);
-        let Acad = 0;
+        ///let Confidence = parseInt(this.confidence);
         
+        let passingScore;
+        if(NatPassScore <= 100 && NatPassScore >= 90) {
+          passingScore = 10;
+        } 
+        else if(NatPassScore >= 90 && NatPassScore <= 100) {
+          passingScore = 9;
+        }
+        else if(NatPassScore >= 80 && NatPassScore <= 90) {
+          passingScore = 8;
+        }
+        else if(NatPassScore >= 70 && NatPassScore <= 80) {
+          passingScore = 7;
+        }
+        else if(NatPassScore >= 60 && NatPassScore >= 70) {
+          passingScore = 6;
+        }
+        else if(NatPassScore >= 50 && NatPassScore <= 60) {
+          passingScore = 5;
+        }
+        else if(NatPassScore >= 40 && NatPassScore <= 50) {
+          passingScore = 4;
+        }
+        else if(NatPassScore >= 30 && NatPassScore <= 40) {
+          passingScore = 3;
+        }
+        else if(NatPassScore >= 20 && NatPassScore <= 30) {
+          passingScore = 2;
+        }
+        else if(NatPassScore >= 10 && NatPassScore <= 20) {
+          passingScore = 1;
+        }
+
+        let gwa;
+        if(GWA >= 1 && GWA <= 1.25) {
+          gwa = 50;
+        }
+        else if(GWA >= 1.26 && GWA <= 1.50) {
+          gwa = 45;
+        }
+        else if(GWA >= 1.51 && GWA <= 1.75) {
+          gwa = 40;
+        }
+        else if(GWA >= 1.76 && GWA <= 2) {
+          gwa = 35;
+        }
+        else if(GWA >= 2.01 && GWA <= 2.25) {
+          gwa = 30;
+        }
+        else if(GWA >= 2.26 && GWA <= 2.50) {
+          gwa = 25;
+        }
+        else if(GWA >= 2.51 && GWA <= 2.75) {
+          gwa = 20;
+        }
+        else if(GWA >= 2.76 && GWA <= 3.00) {
+          gwa = 15;
+        }
+        else if(GWA >= 3.01 && GWA <= 4.95) {
+          gwa = 10;
+        }
+        else gwa = 5;
+
         let probability;
+
+        GWA = (GWA * 0.30);
+        ReviewC = (ReviewC * 0.15);
+        SelfReview = (SelfReview * 0.10);
+        passingScore = (passingScore * 0.20);
+        preBoard = (preBoard * 0.25); 
        
-        Acad = (
-          (
-            ((6 - GenEd / 5) * 100) + 
-            ((6 - ProfEd / 5) * 100) + 
-            ((6 - MEd / 5) * 100)
-          ) / 3
-        );
-       Acad = parseFloat(Acad);
-       
-       probability = (Acad + SelfReview + ReviewC + (NatPassScore/100) + (Confidence * 20)) /5;
-       probability -= 100;
+        probability = (gwa * 2 * 0.3 + ReviewC + SelfReview + passingScore + preBoard);
 
        //cant touch this, kasi ito yung magpapasa ng sagot na probability papunta sa next page na results
 
