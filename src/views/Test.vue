@@ -189,6 +189,7 @@
         selfReview: null,
         nationalPassingScore: null,
         confidence: null,
+        
         loading: false,
         btnDisable: false,
         alertDialog: false,
@@ -313,7 +314,7 @@
 
         let probability;
 
-        GWA = (GWA * 0.30);
+        //GWA = (GWA * 0.30);
         ReviewC = (ReviewC * 0.15);
         SelfReview = (SelfReview * 0.10);
         passingScore = (passingScore * 0.20);
